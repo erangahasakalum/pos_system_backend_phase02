@@ -18,7 +18,7 @@ import java.sql.DriverManager;
 @Configuration
 @EnableJpaRepositories
 @EnableTransactionManagement
-@ComponentScan("lk.ijse.gdse67.pos_system_backend_phase02")
+@ComponentScan("lk.ijse.gdse67")
 public class WebAppRootConfig {
     @Bean
     public DataSource dataSource() {
@@ -38,7 +38,7 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
     LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
     factory.setJpaVendorAdapter(vendorAdapter);
-    factory.setPackagesToScan("lk.ijse.gdse67.pos_system_backend_phase02");
+    factory.setPackagesToScan("lk.ijse.gdse67.pos_system_backend_phase02.entity");
     factory.setDataSource(dataSource());
     return factory;
 }
