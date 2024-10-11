@@ -38,7 +38,7 @@ public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
     LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
     factory.setJpaVendorAdapter(vendorAdapter);
-    factory.setPackagesToScan("com.acme.domain");
+    factory.setPackagesToScan("lk.ijse.gdse67.pos_system_backend_phase02");
     factory.setDataSource(dataSource());
     return factory;
 }

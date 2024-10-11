@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,6 +21,9 @@ public class OrderEntity {
     private double total;
     private double balance;
     @ManyToOne
+    @JoinColumn(name = "customerId")
     private CustomerEntity customer;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    private List<OrderDetailEntity> orderDetails;
 
 }
