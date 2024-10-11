@@ -16,8 +16,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerDao customerDao;
     @Override
-    public void saveCustomer(CustomerDto customerDto) {
-        CustomerEntity save = customerDao.save(customerDto);
+    public CustomerDto saveCustomer(CustomerDto customerDto) {
+
     }
 
     @Override

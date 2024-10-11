@@ -1,6 +1,7 @@
 package lk.ijse.gdse67.pos_system_backend_phase02.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +31,11 @@ public class WebAppRootConfig {
         return dataSource;
     }
 
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
+
 @Bean
 public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
@@ -52,3 +58,4 @@ public PlatformTransactionManager transactionManager(EntityManagerFactory entity
     }
 
 }
+
