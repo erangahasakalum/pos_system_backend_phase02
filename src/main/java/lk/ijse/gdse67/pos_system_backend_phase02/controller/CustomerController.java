@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/customer")
 public class CustomerController {
+
     @Autowired
     CustomerService customerService;
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE )
     public String saveCustomer(@RequestBody CustomerDto customerDto){
-            customerService.saveCustomer(customerDto);
+        customerService.saveCustomer(customerDto);
     }
 
 }

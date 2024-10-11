@@ -4,7 +4,10 @@ import jakarta.transaction.Transactional;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.CustomerDao;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.CustomerEntity;
+import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
 import lk.ijse.gdse67.pos_system_backend_phase02.service.CustomerService;
+import lk.ijse.gdse67.pos_system_backend_phase02.util.Mapping;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,15 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerDao customerDao;
-    @Override
-    public CustomerDto saveCustomer(CustomerDto customerDto) {
 
+    @Autowired
+    Mapping customerMapping;
+    @Override
+    public void saveCustomer(CustomerDto customerDto) {
+        CustomerEntity saveCustomer = customerDao.save(customerMapping.toCustomerEntity(customerDto));
+        if (saveCustomer == null){
+            throw new DataPersistException("Customer Not Saved");
+        }
     }
 
     @Override

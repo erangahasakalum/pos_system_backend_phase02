@@ -17,9 +17,10 @@ import javax.sql.DataSource;
 import java.sql.DriverManager;
 
 @Configuration
-@EnableJpaRepositories
+@ComponentScan(basePackages = "lk.ijse.gdse67")
+@EnableJpaRepositories(basePackages = "lk.ijse.gdse67.pos_system_backend_phase02.dao")
 @EnableTransactionManagement
-@ComponentScan("lk.ijse.gdse67")
+
 public class WebAppRootConfig {
     @Bean
     public DataSource dataSource() {
@@ -32,29 +33,29 @@ public class WebAppRootConfig {
     }
 
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
-@Bean
-public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
-    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-    vendorAdapter.setGenerateDdl(true);
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setGenerateDdl(true);
 
-    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-    factory.setJpaVendorAdapter(vendorAdapter);
-    factory.setPackagesToScan("lk.ijse.gdse67.pos_system_backend_phase02.entity");
-    factory.setDataSource(dataSource());
-    return factory;
-}
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPackagesToScan("lk.ijse.gdse67.pos_system_backend_phase02.entity");
+        factory.setDataSource(dataSource());
+        return factory;
+    }
 
-@Bean
-public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 
-    JpaTransactionManager txManager = new JpaTransactionManager();
-    txManager.setEntityManagerFactory(entityManagerFactory);
-    return txManager;
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        txManager.setEntityManagerFactory(entityManagerFactory);
+        return txManager;
     }
 
 }

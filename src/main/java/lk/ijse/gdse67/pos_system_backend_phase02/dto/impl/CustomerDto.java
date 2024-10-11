@@ -15,5 +15,5 @@ public class CustomerDto implements SuperDto {
     private String name;
     private String city;
     private String telephone;
-    private List<OrderDto> orderList;
+    private String orderId;
 }
