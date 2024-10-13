@@ -17,11 +17,11 @@ import java.util.List;
 @Entity
 public class CustomerEntity implements SuperEntity {
     @Id
-    private String customerId;
+    private String customerId   ;
     private String name;
     private String city;
     private String tel;
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private List<OrderEntity> orders;
+    private List<OrderEntity> orderList;
 
 }
