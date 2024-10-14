@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CustomerDto implements SuperDto, CustomerStatus {
+public class CustomerDto implements CustomerStatus {
     private String customerId;
     private String name;
     private String city;
