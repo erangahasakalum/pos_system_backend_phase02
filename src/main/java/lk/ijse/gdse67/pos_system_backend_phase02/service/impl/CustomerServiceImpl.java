@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.CustomerDao;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.CustomerEntity;
+import lk.ijse.gdse67.pos_system_backend_phase02.exception.CustomerNotPoundException;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
 import lk.ijse.gdse67.pos_system_backend_phase02.service.CustomerService;
 import lk.ijse.gdse67.pos_system_backend_phase02.util.AppUtil;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -38,6 +40,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(String customerId) {
+        Optional<CustomerEntity> tmpCustomer = customerDao.findById(customerId);
+        if (tmpCustomer.isPresent()){
+            customerDao.deleteById(customerId);
+        }else {
+            throw new CustomerNotPoundException("Customer ID with " + customerId + "Not Found!");
+        }
 
     }
 
