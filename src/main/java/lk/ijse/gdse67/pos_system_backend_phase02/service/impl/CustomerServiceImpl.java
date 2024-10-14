@@ -1,7 +1,9 @@
 package lk.ijse.gdse67.pos_system_backend_phase02.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.gdse67.pos_system_backend_phase02.customStatesCodes.ErrorStatusCodes;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.CustomerDao;
+import lk.ijse.gdse67.pos_system_backend_phase02.dto.CustomerStatus;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.CustomerEntity;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.CustomerNotPoundException;
@@ -55,13 +57,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void getCustomer(String customerId) {
-
+    public CustomerStatus getCustomer(String customerId) {
+        if (customerDao.existsById(customerId)){
+            CustomerEntity referenceById = customerDao.getReferenceById(customerId);
+            return customerMapping.toCustomerDto(referenceById);
+        }else {
+            return new ErrorStatusCodes( 2, "selected id not found");
+        }
     }
 
     @Override
     public List<CustomerDto> getAllCustomer() {
         return customerMapping.asCustomerDtoList( customerDao.findAll());
-
     }
 }
