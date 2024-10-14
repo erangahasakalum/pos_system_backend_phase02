@@ -56,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getAllCustomer() {
-        return null;
+        return customerMapping.asCustomerDtoList( customerDao.findAll());
+
     }
 }
