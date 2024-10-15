@@ -3,8 +3,10 @@ package lk.ijse.gdse67.pos_system_backend_phase02.controller;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.ItemStatus;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
+import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
 import lk.ijse.gdse67.pos_system_backend_phase02.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,13 @@ public class ItemController {
 
         try {
             itemService.saveItem(itemDto);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch (DataPersistException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }

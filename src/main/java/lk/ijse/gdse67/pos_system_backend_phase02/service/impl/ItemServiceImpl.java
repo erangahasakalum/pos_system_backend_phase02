@@ -3,8 +3,12 @@ package lk.ijse.gdse67.pos_system_backend_phase02.service.impl;
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.ItemDao;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
+import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.ItemEntity;
+import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
 import lk.ijse.gdse67.pos_system_backend_phase02.service.ItemService;
 import lk.ijse.gdse67.pos_system_backend_phase02.util.AppUtil;
+import lk.ijse.gdse67.pos_system_backend_phase02.util.Mapping;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +17,16 @@ import org.springframework.stereotype.Service;
 public class ItemServiceImpl implements ItemService {
     @Autowired
     ItemDao itemDao;
+
+    @Autowired
+    Mapping itemMapping;
     @Override
     public void saveItem(ItemDto itemDto) {
         itemDto.setItemId(AppUtil.generateItemId());
-        itemDao.save(itemDao)
+        ItemEntity saveItem = itemDao.save(itemMapping.toItemEntity(itemDto));
+        if (saveItem == null){
+            throw  new DataPersistException("Item not saved");
+        }
     }
 
     @Override
