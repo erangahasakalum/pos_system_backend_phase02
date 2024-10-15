@@ -13,32 +13,35 @@ import java.util.List;
 
 @Component
 public class Mapping {
-        @Autowired
-        private ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
-        public CustomerEntity toCustomerEntity(CustomerDto customerDto){
-            return modelMapper.map(customerDto, CustomerEntity.class);
-        }
-        public CustomerDto toCustomerDto(CustomerEntity customerEntity){
-            return modelMapper.map(customerEntity, CustomerDto.class);
-        }
-        public List<CustomerDto> asCustomerDtoList(List<CustomerEntity> list){
-            return modelMapper.map(list, new TypeToken<List<CustomerDto>>() {
-            }.getType());
-        }
+    public CustomerEntity toCustomerEntity(CustomerDto customerDto) {
+        return modelMapper.map(customerDto, CustomerEntity.class);
+    }
 
-        /////////////////////////////////////////////////////////////////////////
+    public CustomerDto toCustomerDto(CustomerEntity customerEntity) {
+        return modelMapper.map(customerEntity, CustomerDto.class);
+    }
 
-        public ItemDto toItemDto(ItemEntity item){
-            return modelMapper.map(item, ItemDto.class);
-        }
+    public List<CustomerDto> asCustomerDtoList(List<CustomerEntity> list) {
+        return modelMapper.map(list, new TypeToken<List<CustomerDto>>() {
+        }.getType());
+    }
 
-        public ItemEntity toItemEntity(ItemDto itemDto){
-            return modelMapper.map(itemDto, ItemEntity.class);
-        }
+    /////////////////////////////////////////////////////////////////////////
 
-        public List<ItemDto> asItemDtoList(List<ItemEntity> list){
-            return modelMapper.map(list, new TypeToken<List<ItemDto>>() {
-            }.getType());
-        }
+    public ItemDto toItemDto(ItemEntity item) {
+        return modelMapper.map(item, ItemDto.class);
+    }
+
+    public ItemEntity toItemEntity(ItemDto itemDto) {
+        return modelMapper.map(itemDto, ItemEntity.class);
+    }
+
+
+    public List<ItemDto> asItemDtoList(List<ItemEntity> list) {
+        return modelMapper.map(list, new TypeToken<List<CustomerDto>>() {
+        }.getType());
+    }
 }

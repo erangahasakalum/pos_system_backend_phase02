@@ -1,7 +1,10 @@
 package lk.ijse.gdse67.pos_system_backend_phase02.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.gdse67.pos_system_backend_phase02.customStatesCodes.ErrorStatusCodes;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.ItemDao;
+import lk.ijse.gdse67.pos_system_backend_phase02.dto.CustomerStatus;
+import lk.ijse.gdse67.pos_system_backend_phase02.dto.ItemStatus;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.CustomerEntity;
@@ -57,9 +60,16 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-    public void getItem(String itemId) {
+    public ItemStatus getItem(String itemId) {
+        if (itemDao.existsById(itemId)) {
+            ItemEntity referenceById = itemDao.getReferenceById(itemId);
+            return itemMapping.toItemDto(referenceById);
+        } else {
+            return new ErrorStatusCodes(2, "selected id not found");
+        }
 
     }
+
 
     @Override
     public void getAllItem() {

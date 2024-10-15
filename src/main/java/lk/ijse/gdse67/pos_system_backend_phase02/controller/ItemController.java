@@ -54,4 +54,9 @@ public class ItemController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/{itemId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ItemStatus getSelectedItem(@PathVariable ("itemId") String itemId){
+        return itemService.getItem(itemId);
+    }
 }
