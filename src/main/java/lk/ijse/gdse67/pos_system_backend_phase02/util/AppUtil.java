@@ -7,5 +7,8 @@ public class AppUtil {
         return "CUSTOMER -"+UUID.randomUUID();
     }
 
+    public static String generateItemId(){
+        return "ITEM -" + UUID.randomUUID();
+    }
 
 }
