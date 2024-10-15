@@ -43,11 +43,15 @@ public class ItemController {
         }
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,value = "/{itemId}")
-    public ResponseEntity<Void>  updateItem(@PathVariable("itemId") String itemId,ItemDto itemDto){
+    @PutMapping(value = "/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void>  updateItem(@PathVariable("itemId") String itemId,@RequestBody ItemDto itemDto) {
         try {
-            itemService.updateItem(itemId,itemDto);
-        }catch ()
-
+            itemService.updateItem(itemId, itemDto);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (DataPersistException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

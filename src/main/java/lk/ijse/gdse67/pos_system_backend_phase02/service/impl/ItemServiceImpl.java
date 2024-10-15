@@ -2,7 +2,9 @@ package lk.ijse.gdse67.pos_system_backend_phase02.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.ItemDao;
+import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
+import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.CustomerEntity;
 import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.ItemEntity;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.CustomerNotPoundException;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
@@ -45,8 +47,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateItem(String itemId, ItemDto itemDto) {
-
+        Optional<ItemEntity> tempItem = itemDao.findById(itemId);
+        if (tempItem.isPresent()){
+            tempItem.get().setName(itemDto.getName());
+            tempItem.get().setQuantity(itemDto.getQuantity());
+            tempItem.get().setPrice(itemDto.getPrice());
+        }
     }
+
 
     @Override
     public void getItem(String itemId) {
