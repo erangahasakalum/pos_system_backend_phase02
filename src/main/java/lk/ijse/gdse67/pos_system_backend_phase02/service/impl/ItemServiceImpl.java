@@ -4,13 +4,17 @@ import jakarta.transaction.Transactional;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.ItemDao;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.ItemEntity;
+import lk.ijse.gdse67.pos_system_backend_phase02.exception.CustomerNotPoundException;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
+import lk.ijse.gdse67.pos_system_backend_phase02.exception.ItemNotPoundException;
 import lk.ijse.gdse67.pos_system_backend_phase02.service.ItemService;
 import lk.ijse.gdse67.pos_system_backend_phase02.util.AppUtil;
 import lk.ijse.gdse67.pos_system_backend_phase02.util.Mapping;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,8 +34,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void deleteItem(String itemId) {
-
+    public void deleteItem(String itemId){
+        Optional<ItemEntity> tmpItem = itemDao.findById(itemId);
+        if (tmpItem.isPresent()){
+            itemDao.deleteById(itemId);
+        }else {
+            throw new ItemNotPoundException("Customer ID with " + itemId + " Not Found!");
+        }
     }
 
     @Override

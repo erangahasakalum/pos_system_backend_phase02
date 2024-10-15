@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/item")
@@ -33,5 +30,24 @@ public class ItemController {
         }
     }
 
+    @DeleteMapping(value = "/{itemId}")
+    public ResponseEntity<Void> deleteItem(@PathVariable ("itemId") String itemId){
 
+        try {
+            itemService.deleteItem(itemId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (DataPersistException e){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,value = "/{itemId}")
+    public ResponseEntity<Void>  updateItem(@PathVariable("itemId") String itemId,ItemDto itemDto){
+        try {
+            itemService.updateItem(itemId,itemDto);
+        }catch ()
+
+    }
 }
