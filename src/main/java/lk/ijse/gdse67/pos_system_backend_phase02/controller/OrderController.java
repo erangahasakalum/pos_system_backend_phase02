@@ -1,5 +1,7 @@
 package lk.ijse.gdse67.pos_system_backend_phase02.controller;
 
+import lk.ijse.gdse67.pos_system_backend_phase02.dto.ItemStatus;
+import lk.ijse.gdse67.pos_system_backend_phase02.dto.OrderStatus;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.OrderDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
@@ -62,4 +64,10 @@ public class OrderController {
     public List<OrderDto> getAllOrders() {
         return orderService.getAllOrder();
     }
+
+    @GetMapping(value = "/{orderId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderStatus getSelectedItem(@PathVariable ("orderId") String itemId){
+        return orderService.getSelectedOrder(itemId);
+    }
+
 }

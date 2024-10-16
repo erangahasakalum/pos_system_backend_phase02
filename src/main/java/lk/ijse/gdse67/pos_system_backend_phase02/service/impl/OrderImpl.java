@@ -1,6 +1,7 @@
 package lk.ijse.gdse67.pos_system_backend_phase02.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.gdse67.pos_system_backend_phase02.customStatesCodes.ErrorStatusCodes;
 import lk.ijse.gdse67.pos_system_backend_phase02.dao.OrderDao;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.ItemStatus;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.OrderStatus;
@@ -61,7 +62,12 @@ public class OrderImpl implements OrderService {
 
     @Override
     public OrderStatus getSelectedOrder(String orderId) {
-        return null;
+        if (orderDao.existsById(orderId)) {
+            OrderEntity referenceById = orderDao.getReferenceById(orderId);
+            return orderMapping.toOrderDto(referenceById);
+        } else {
+            return new ErrorStatusCodes(2, "selected order not found");
+        }
     }
 
     @Override
