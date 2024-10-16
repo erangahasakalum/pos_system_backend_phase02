@@ -41,7 +41,7 @@ public class Mapping {
 
 
     public List<ItemDto> asItemDtoList(List<ItemEntity> list) {
-        return modelMapper.map(list, new TypeToken<List<CustomerDto>>() {
+        return modelMapper.map(list, new TypeToken<List<ItemDto>>() {
         }.getType());
     }
 }
