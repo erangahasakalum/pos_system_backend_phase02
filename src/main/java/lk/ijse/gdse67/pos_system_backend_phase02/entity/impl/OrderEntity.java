@@ -20,10 +20,11 @@ public class OrderEntity {
     private double discount;
     private double total;
     private double balance;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerId")
     private CustomerEntity customer;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderDetailEntity> orderDetails;
+
 
 }
