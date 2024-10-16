@@ -48,7 +48,15 @@ public class OrderImpl implements OrderService {
 
     @Override
     public void updateOrder(String orderId, OrderDto orderDto) {
+    /*    Optional<OrderEntity> tempOrder = orderDao.findById(orderId);
+        if (tempOrder.isPresent()){
+            tempOrder.get().setDate(orderDto.getDate());
+            tempOrder.get().setDiscount(orderDto.getDiscount());
+            tempOrder.get().setTotal(orderDto.getTotal());
+            tempOrder.get().setBalance(orderDto.getBalance());
+            tempOrder.get().setCustomer(orderMapping.toCustomerEntity(orderDto.getCustomerId()));
 
+        }*/
     }
 
     @Override
@@ -58,6 +66,7 @@ public class OrderImpl implements OrderService {
 
     @Override
     public List<OrderDto> getAllOrder() {
-        return null;
+        List<OrderEntity> allOrders = orderDao.findAll();
+        return orderMapping.asOrderDtoList(allOrders);
     }
 }
