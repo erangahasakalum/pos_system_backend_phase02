@@ -3,6 +3,7 @@ package lk.ijse.gdse67.pos_system_backend_phase02.controller;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.ItemStatus;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.CustomerDto;
 import lk.ijse.gdse67.pos_system_backend_phase02.dto.impl.ItemDto;
+import lk.ijse.gdse67.pos_system_backend_phase02.entity.impl.ItemEntity;
 import lk.ijse.gdse67.pos_system_backend_phase02.exception.DataPersistException;
 import lk.ijse.gdse67.pos_system_backend_phase02.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/item")
@@ -58,5 +61,11 @@ public class ItemController {
     @GetMapping(value = "/{itemId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemStatus getSelectedItem(@PathVariable ("itemId") String itemId){
         return itemService.getItem(itemId);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ItemDto> getAllCustomer(){
+        return itemService.getAllItem();
+
     }
 }

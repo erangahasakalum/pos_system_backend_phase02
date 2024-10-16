@@ -19,6 +19,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -72,7 +73,8 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-    public void getAllItem() {
-
+    public List<ItemDto> getAllItem() {
+        List<ItemEntity> allItem = itemDao.findAll();
+        return itemMapping.asItemDtoList(allItem);
     }
 }
