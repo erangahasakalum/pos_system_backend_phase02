@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/order")
 public class OrderController {
@@ -49,14 +50,6 @@ public class OrderController {
 
     @PutMapping(value = {"/orderId"}, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateOrder(@PathVariable("orderId") String orderId, @RequestBody OrderDto orderDto) {
-     /*   try {
-            orderService.updateOrder(orderId,orderDto);
-
-        }catch (DataPersistException e){
-
-        }catch (Exception e){
-
-        }*/
         return null;
     }
 
