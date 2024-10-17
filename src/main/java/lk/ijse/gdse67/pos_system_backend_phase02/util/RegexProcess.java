@@ -8,4 +8,14 @@ public class RegexProcess {
         Pattern regexPattern = Pattern.compile(regexCustomerId);
         return regexPattern.matcher(customerId).matches();
     }
+    public static boolean itemIdMatcher(String itemId) {
+        String regexCustomerId = "^ITEM -[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$\n";
+        Pattern regexPattern = Pattern.compile(regexCustomerId);
+        return regexPattern.matcher(itemId).matches();
+    }
+    public static boolean orderIdMatcher(String orderId) {
+        String regexCustomerId = "^ORDER -[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$\n";
+        Pattern regexPattern = Pattern.compile(regexCustomerId);
+        return regexPattern.matcher(orderId).matches();
+    }
 }
